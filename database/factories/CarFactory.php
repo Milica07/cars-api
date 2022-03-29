@@ -38,7 +38,7 @@ class CarFactory extends Factory
             'year' => $this->faker->numberBetween(1990, 2022),
             'max_speed' => $this->faker->numberBetween(150, 200),
             'is_automatic' => $this->faker->boolean(30),
-            'engine' => $this->faker->randomElement(self::ENGINES),
+            'engine' => $this->faker->randomElement(Car::ENGINES),
             'number_of_door' => $this->faker->numberBetween(2, 5),
         ];
     }
