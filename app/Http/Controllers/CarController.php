@@ -14,9 +14,23 @@ class CarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $cars = Car::all();
+        //$cars = Car::all();
+        $pageSize = $request->query('per_page', 10);
+        $brand = $request->query('brand');
+        $model = $request->query('model');
+
+        $query = Car::query();
+
+        if ($brand) {
+            $query->searchByBrand($brand);
+        }
+        if ($model) {
+            $query->searchByModel($model);
+        }
+
+        $cars = $query->paginate($pageSize);
         return response()->json($cars);
     }
 
